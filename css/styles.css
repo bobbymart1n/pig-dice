@@ -5,3 +5,6 @@
 #userName {
   text-transform: capitalize;
 }
+.win {
+  display: none;
+}

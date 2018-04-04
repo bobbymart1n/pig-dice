@@ -18,7 +18,7 @@ Player.prototype.diceRoll = function () {
     counter = 0;
   } else {
     this.rollArray.push(roll);
-    if (this.playerScore[this.playerScore.length - 1] >= 100) {
+    if (this.totalPlayerScore >= 100) {
       return "You Win!"
     } else {
       // this.rollArray.map(function(num) {
@@ -36,14 +36,16 @@ Player.prototype.diceRoll = function () {
 Player.prototype.hold = function() {
   // Hold button function
   var counter = 0;
-  this.playerScore.push(this.turnScore);
-  // for (var i = 0; i < this.playerScore.length; i++) {
-  //   counter += this.playerScore[i];
-  // }
-  this.playerScore.map(function(num) {
-    counter += num;
-  });
-  this.totalPlayerScore = counter;
+  if (this.totalPlayerScore >= 100) {
+    alert("You Win!");
+  } else {
+    this.playerScore.push(this.turnScore);
+
+    this.playerScore.map(function(num) {
+      counter += num;
+    });
+    this.totalPlayerScore = counter;
+  }
   console.log(this.playerScore, "THIS IS THE PLAYERSCORE");
 };
 
@@ -64,8 +66,13 @@ $(function() {
       console.log(playerOne.turnScore, "CURRENT TURN SCORE");
     });
 
+
     $("#hold").click(function() {
       playerOne.hold();
+      if(playerOne.totalPlayerScore >= 100) {
+        $("#win").text(playerOne.playerName);
+        $(".win").show();
+      }
       $("#playerScore").text(playerOne.totalPlayerScore);
       playerOne.turnScore = 0;
       playerOne.rollArray = [];
