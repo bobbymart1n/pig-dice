@@ -53,6 +53,9 @@ Player.prototype.computer = function () {
 
 // User Interface Logic
 $(function() {
+  $("#twoPlayer").click(function() {
+    $("#showPlayerTwo").show();
+  });
   $("#player").submit(function(event) {
     event.preventDefault();
     var playerName = $("#playerName").val();
