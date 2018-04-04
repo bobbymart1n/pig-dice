@@ -1,12 +1,12 @@
-# Movie Tickets
+# Pig Dice
 
-#### A program that allows users to choose a movie and show prices depending on the condition of their age, and the time of the movies being shown. 04/03/2018
+#### A basic dice game.  04/04/2018
 
-#### By **Isaac Shoman**
+#### By **Isaac Shoman and Bobby Martin**
 
 ## Description
 
-A website that uses prototype and constructs. Also uses a for loop and branching.
+A basic dice game that totals player scores and other things....
 
 ### Specs
 | Spec | Input | Output |
@@ -22,9 +22,9 @@ A website that uses prototype and constructs. Also uses a for loop and branching
 
 ## Setup/Installation Requirements
 
-3. Clone this repository.
-4. Open in a browser.
-5. To edit code, open in a text editor.
+1. Clone this repository.
+2. Open in a browser.
+3. To edit code, open in a text editor.
 
 ## Known Bugs
 *
