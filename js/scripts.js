@@ -31,3 +31,15 @@ function turnTotal() {
     console.log(playerScore);
   }
 };
+
+
+
+$(function() {
+  $("#player").submit(function(event) {
+    event.preventDefault();
+    var playerName = $("#playerName").val();
+    $(this).hide();
+    $("#gameBoard").show();
+    $("h2#userName").text(playerName);
+  });
+});

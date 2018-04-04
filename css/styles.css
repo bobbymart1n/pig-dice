@@ -1,0 +1,7 @@
+#gameBoard {
+  display: none;
+}
+
+#userName {
+  text-transform: capitalize;
+}
