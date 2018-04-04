@@ -20,7 +20,7 @@ Player.prototype.diceRoll = function () {
     for (i = 0; i < this.rollArray.length; i++) {
       counter += this.rollArray[i]
     }
-    console.log(this.rollArray, "ROLL ARRAY");
+    console.log(computer.rollArray, "COMPUTER ROLL ARRAY");
     this.turnScore = counter;
   }
 };
@@ -34,7 +34,20 @@ Player.prototype.hold = function() {
     counter += num;
   });
   this.totalPlayerScore = counter;
-  console.log(this.playerScore, "THIS IS THE PLAYERSCORE");
+};
+Player.prototype.computerHold = function () {
+  computer.hold();
+  computer.turnScore = 0;
+  computer.rollArray = [];
+  console.log(computer.totalPlayerScore, "THIS IS THE COMPUTER SCORE")
+};
+// AI Functions
+var computer = new Player("Computer");
+Player.prototype.computer = function () {
+  while(computer.rollArray.length <= 1) {
+    computer.diceRoll();
+  }
+  computer.computerHold();
 };
 
 
@@ -43,22 +56,23 @@ $(function() {
   $("#player").submit(function(event) {
     event.preventDefault();
     var playerName = $("#playerName").val();
-    var playerOne = new Player(playerName);
     $(this).hide();
     $("#gameBoard").show();
     $("h1#userName").text(playerName);
-
+    var playerOne = new Player(playerName);
     // Roll Click
     $("#roll").click(function(){
       playerOne.diceRoll();
       if (playerOne.rollArray.length === 0) {
         $("#dice h1").text("You rolled a 1. Your turn is over.");
+        computer.computer();
+        $("#computerScore").text(computer.totalPlayerScore);
       } else {
         $("#dice h1").text(playerOne.rollArray[playerOne.rollArray.length - 1]);
         console.log(playerOne.turnScore, "CURRENT TURN SCORE");
       }
     });
-
+    // Hold Click
     $("#hold").click(function() {
       playerOne.hold();
       if(playerOne.totalPlayerScore >= 100) {
@@ -68,6 +82,11 @@ $(function() {
       $("#playerScore").text(playerOne.totalPlayerScore);
       playerOne.turnScore = 0;
       playerOne.rollArray = [];
+      computer.computer();
+      $("#computerScore").text(computer.totalPlayerScore);
     });
   });
+  if(computer.totalPlayerScore >= 100) {
+    $(".computer-win").show();
+  }
 });
