@@ -68,6 +68,7 @@ $(function() {
         computer.computer();
         $("#computerScore").text(computer.totalPlayerScore);
       } else {
+        $("#player-turnscore").text(playerOne.turnScore);
         $("#dice h1").text(playerOne.rollArray[playerOne.rollArray.length - 1]);
         console.log(playerOne.turnScore, "CURRENT TURN SCORE");
       }
