@@ -1,7 +1,4 @@
-var turnScore = 0;
-var rollArray = [];
-var playerScore = [];
-
+// Player Object
 function Player(name) {
   this.playerName = name;
   this.playerScore = [];
@@ -9,37 +6,48 @@ function Player(name) {
   this.rollArray = [];
 }
 
-function diceRoll() {
+// Player Prototypes
+Player.prototype.diceRoll = function () {
   var roll = Math.floor(Math.random() * 6 + 1);
   if (roll === 1) {
-    return rollArray = [];
+    return this.rollArray = [];
   } else {
-    rollArray.push(roll);
+    this.rollArray.push(roll);
   }
-  console.log(rollArray);
+  console.log(this.rollArray);
 };
 
-function turnTotal() {
+Player.prototype.turnTotal = function() {
   // Hold button function
-  if (playerScore[playerScore.length - 1] >= 100) {
+  if (this.playerScore[this.playerScore.length - 1] >= 100) {
     return "You Win!"
   } else {
-    for (i=0; i < rollArray.length; i++) {
-      turnScore += (rollArray[i]);
+    for (i=0; i < this.rollArray.length; i++) {
+      this.turnScore += (this.rollArray[i]);
     }
-    playerScore.push(turnScore);
-    console.log(playerScore);
+    this.playerScore.push(this.turnScore);
+    console.log(this.playerScore);
   }
 };
 
 
-
+// User Interface Logic
 $(function() {
   $("#player").submit(function(event) {
     event.preventDefault();
     var playerName = $("#playerName").val();
+    var playerOne = new Player(playerName);
+    console.log(playerOne);
     $(this).hide();
     $("#gameBoard").show();
-    $("h2#userName").text(playerName);
+    $("h1#userName").text(playerName);
+
+    // Roll Click
+    $("#roll").click(function(){
+      playerOne.diceRoll();
+      console.log(playerOne.rollArray)
+    })
+
+    $("#playerScore").text()
   });
 });

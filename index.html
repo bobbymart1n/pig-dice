@@ -22,8 +22,15 @@
         </div>
       </form>
       <div id="gameBoard">
-        <h1>Player 1:</h1>
-        <h2 id="userName"></h2>
+        <h1 id="userName"></h1>
+        <h2>
+          <button id=roll class="btn btn-success" type="button">Roll!</button>
+          <button id=hold class="btn btn-danger" type="button">Hold!</button>
+        </h2>
+        <ul class="output">
+          <li>Score: <span id="playerScore"></span></li>
+        </ul>
+
       </div>
     </div>
   </body>
