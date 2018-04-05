@@ -1,4 +1,4 @@
-#gameBoard, #showPlayerTwo {
+#gameBoard, #showPlayerTwo, #twoPlayerButtons, #playerButtons, #playerTwoButtons {
   display: none;
 }
 
