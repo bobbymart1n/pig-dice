@@ -11,3 +11,11 @@
 .computer-win {
   display: none;
 }
+
+.single-player-scores {
+  display:none;
+}
+
+.two-player-scores {
+  display: none;
+}

@@ -20,7 +20,6 @@ Player.prototype.diceRoll = function () {
     for (i = 0; i < this.rollArray.length; i++) {
       counter += this.rollArray[i]
     }
-    console.log(computer.rollArray, "COMPUTER ROLL ARRAY");
     this.turnScore = counter;
   }
 };
@@ -36,18 +35,18 @@ Player.prototype.hold = function() {
   this.totalPlayerScore = counter;
 };
 Player.prototype.computerHold = function () {
-  computer.hold();
-  computer.turnScore = 0;
-  computer.rollArray = [];
-  console.log(computer.totalPlayerScore, "THIS IS THE COMPUTER SCORE")
+  this.hold();
+  this.turnScore = 0;
+  this.rollArray = [];
 };
 // AI Functions
-var computer = new Player("Computer");
+
 Player.prototype.computer = function () {
-  while(computer.rollArray.length <= 1) {
-    computer.diceRoll();
+  while(this.rollArray.length <= 1) {
+    // Set interval timing for computer dice roll
+    this.diceRoll();
   }
-  computer.computerHold();
+  this.computerHold();
 };
 
 
@@ -56,41 +55,59 @@ $(function() {
   $("#twoPlayer").click(function() {
     $("#showPlayerTwo").show();
   });
+  $("#onePlayer").click(function() {
+    $("#showPlayerTwo").hide();
+  });
   $("#player").submit(function(event) {
     event.preventDefault();
+    // debugger;
     var playerName = $("#playerName").val();
+    var playerTwoName = $("#playerTwoName").val();
     $(this).hide();
     $("#gameBoard").show();
     $("h1#userName").text(playerName);
-    var playerOne = new Player(playerName);
-    // Roll Click
-    $("#roll").click(function(){
-      playerOne.diceRoll();
-      if (playerOne.rollArray.length === 0) {
+    if (typeof playerTwoName === "string"){ // Runs Two Player Logic on
+      var playerOne = new Player(playerName);
+      var playerTwo = new Player(playerTwoName);
+      console.log(playerTwo);
+      $("#twoPlayerButtons").show();
+      $("div.two-player-scores").show();
+      if (playerOne.rollArray.length === 0 || playerTwo.rollArray.length === 0) {
         $("#dice h1").text("You rolled a 1. Your turn is over.");
+      }
+    } else {
+      var singlePlayer = new Player(playerName);
+      var computer = new Player("Computer");
+      $("div.single-player-scores").show();
+      // Single player Roll Click
+      $("#roll").click(function(){
+        singePlayer.diceRoll();
+        if (singePlayer.rollArray.length === 0) {
+          $("#dice h1").text("You rolled a 1. Your turn is over.");
+          // Computer runs after player Rolls a 1
+          computer.computer();
+          $("#computerScore").text(computer.totalPlayerScore);
+        } else {
+          $("#player-turnscore").text(singePlayer.turnScore);
+          $("#dice h1").text(singePlayer.rollArray[singePlayer.rollArray.length - 1]);
+        }
+      });
+      // Single Player Hold Click
+      $("#hold").click(function() {
+        singePlayer.hold();
+        if(singePlayer.totalPlayerScore >= 100) {
+          $("#win").text(' ' + singePlayer.playerName);
+          $(".win").show();
+        }
+        $("#playerScore").text(singePlayer.totalPlayerScore);
+        singePlayer.turnScore = 0;
+        singePlayer.rollArray = [];
         computer.computer();
         $("#computerScore").text(computer.totalPlayerScore);
-      } else {
-        $("#player-turnscore").text(playerOne.turnScore);
-        $("#dice h1").text(playerOne.rollArray[playerOne.rollArray.length - 1]);
-        console.log(playerOne.turnScore, "CURRENT TURN SCORE");
+      });
+      if(computer.totalPlayerScore >= 100) {
+        $(".computer-win").show();
       }
-    });
-    // Hold Click
-    $("#hold").click(function() {
-      playerOne.hold();
-      if(playerOne.totalPlayerScore >= 100) {
-        $("#win").text(' ' + playerOne.playerName);
-        $(".win").show();
-      }
-      $("#playerScore").text(playerOne.totalPlayerScore);
-      playerOne.turnScore = 0;
-      playerOne.rollArray = [];
-      computer.computer();
-      $("#computerScore").text(computer.totalPlayerScore);
-    });
+    }
   });
-  if(computer.totalPlayerScore >= 100) {
-    $(".computer-win").show();
-  }
 });

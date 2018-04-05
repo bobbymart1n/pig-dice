@@ -14,7 +14,7 @@
         <div class="card-body">
           <h1 class="text-center">Pig Dice</h1>
           <div class="btn-group">
-            <button type="button" class="btn btn-info">Player vs Computer</button>
+            <button id="onePlayer" type="button" class="btn btn-info">Player vs Computer</button>
             <button type="button" class="btn btn-primary" id="twoPlayer">Player vs Player</button>
           </div>
         </div>
@@ -36,16 +36,30 @@
           <button id=roll class="btn btn-success" type="button">Roll!</button>
           <button id=hold class="btn btn-danger" type="button">Hold!</button>
         </div>
+        <div id="twoPlayerButtons" class="btn-group">
+          <button id=twoPlayerRoll class="btn btn-success" type="button">Player 2 Roll!</button>
+          <button id=twoPlayerHold class="btn btn-danger" type="button">Player 2 Hold!</button>
+        </div>
         <div id="dice">
           <h1></h1>
           <h3>Turn Score: <span id="player-turnscore"></span></h3>
         </div>
-        <ul class="output">
-          <li>Score: <span id="playerScore"></span></li>
-        </ul>
-        <ul class="output">
-          <li>Score: <span id="computerScore"></span></li>
-        </ul>
+        <div class="single-player-scores">
+          <ul class="output">
+            <li>Player Score: <span id="playerScore"></span></li>
+          </ul>
+          <ul class="output">
+            <li>Computer Score: <span id="computerScore"></span></li>
+          </ul>
+        </div>
+        <div class="two-player-scores">
+          <ul class="output">
+            <li>Player One Score: <span id="playerOneScore"></span></li>
+          </ul>
+          <ul class="output">
+            <li>Player Two Score: <span id="playerTwoScore"></span></li>
+          </ul>
+        </div>
         <div class="win">
           <h1>YOU WIN<span id="win"></span>!!</h1>
         </div>
