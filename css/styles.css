@@ -5,6 +5,30 @@
 #userName {
   text-transform: capitalize;
 }
+#dice div {
+  width: 220px;
+  height: 220px;
+  background-image: url('../img/dice.png');
+  background-repeat: no-repeat;
+}
+.dice-face1 {
+  background-position: 0 0;
+}
+.dice-face2 {
+  background-position: -230px 0;
+}
+.dice-face3 {
+  background-position: -450px 0;
+}
+.dice-face4 {
+  background-position: 0 -220px;
+}
+.dice-face5 {
+  background-position: -240px -220px;
+}
+.dice-face6 {
+  background-position: -450px -220px;
+}
 .win {
   display: none;
 }
